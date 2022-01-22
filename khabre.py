@@ -1,6 +1,9 @@
 import os
 import requests
 from gtts import gTTS
+from pyfiglet import Figlet
+f = Figlet(font='slant')
+print (f.renderText('News'))
 def speack(a):
     language ='en'
     output=gTTS(text=a,lang=language)
@@ -20,3 +23,4 @@ def news():
         print (i+1,news_article[i])
         speack(news_article[i])
 news()
+
