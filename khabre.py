@@ -3,7 +3,7 @@ import requests
 from gtts import gTTS
 from pyfiglet import Figlet
 f = Figlet(font='slant')
-print (f.renderText('News'))
+print (f.renderText('KHABRE'))
 def speack(a):
     language ='en'
     output=gTTS(text=a,lang=language)
