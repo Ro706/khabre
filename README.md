@@ -9,8 +9,6 @@ or by a broadcast network. <br>
 $ git clone https://github.com/Ro706/khabre.git <br>
 $ cd khabre <br>
 $ pip install -r requirements.txt <br>
-$ python3 khabre.py
-
-
-# Thank you
+$ python3 khabre.py <br>
+Thank you
 # made by Ro706
