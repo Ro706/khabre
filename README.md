@@ -1,72 +1,96 @@
-# 🗞️ Khabre - News Reader in Termux
+# 🗞️ Khabre - News Reader for Termux
 
-**Khabre** is a simple Python script that fetches the latest business news headlines from the US using the [NewsAPI](https://newsapi.org/) and reads them aloud using [gTTS (Google Text-to-Speech)](https://pypi.org/project/gTTS/). This script is specifically designed to run inside [Termux](https://termux.dev/) on Android.
+**Khabre** is a simple Python script that fetches the latest US business news headlines using the [NewsAPI](https://newsapi.org/) and reads them aloud using [gTTS (Google Text-to-Speech)](https://pypi.org/project/gTTS/). Built for use in [Termux](https://termux.dev/) on Android, it's a hands-free way to stay updated on business news.
+
+---
 
 ## 📦 Features
 
-- Fetches top 10 US business news headlines from NewsAPI.
-- Converts the headlines to speech using gTTS.
-- Plays the generated audio using `mpv`.
-- Automatically deletes the audio file after playback.
+- ✅ Fetches top 10 business headlines from the US using NewsAPI.
+- 🗣️ Converts news headlines to speech using gTTS.
+- 🔊 Plays audio via `mpv`.
+- 🧹 Automatically deletes the temporary audio file after playback.
+- 🔐 Loads the NewsAPI key securely using a `.env` file.
+- ⚠️ Handles API errors and missing keys gracefully.
 
+---
 
 ## 📲 Installation (in Termux)
 
 ```bash
 pkg update && pkg upgrade
 pkg install python mpv
-pip install gtts requests
+pip install gtts requests python-dotenv
 ```
+
+---
 
 ## 🔑 Setup
 
-1. Get a free API key from [NewsAPI](https://newsapi.org/).
-2. Replace `'API KEY'` in the code with your actual API key:
-   ```python
-   NEWS_API_KEY = 'your_actual_api_key'
+1. Create a free API key at [NewsAPI](https://newsapi.org/).
+2. In the root folder of your project, create a `.env` file:
    ```
+   NEWS_API_KEY=your_actual_api_key
+   ```
+
+---
 
 ## ▶️ Usage
 
-Simply run the script:
+Run the script with:
 
 ```bash
 python khabre.py
 ```
 
-The script will:
-- Print today's date and the top 10 US business headlines.
-- Convert the headlines to speech.
+It will:
+
+- Print today’s date and the top 10 business headlines.
+- Convert the headlines to an audio summary.
 - Play the audio using `mpv`.
-- Delete the audio file afterward.
+- Delete the generated audio file after playback.
+
+---
 
 ## 📁 File Structure
 
 ```
 khabre/
 ├── khabre.py          # Main script
-├── todays_news.mp3   # Temporary audio file (auto-deleted)
+├── .env               # Your API key (not committed to Git)
+├── todays_news.mp3    # Temporary audio file (auto-deleted)
 ├── README.md
-├── requirements.txt 
+├── requirements.txt
 ```
+
+---
+
+## 📄 requirements.txt
+
+```
+gtts
+requests
+python-dotenv
+```
+
+---
 
 ## 🛑 Notes
 
-- Ensure your Termux has access to storage and audio playback capabilities.
-- The script uses hardcoded Termux paths:
-  ```
-  /data/data/com.termux/files/home/khabre/
-  ```
-  Modify the path if you're running it elsewhere.
+- Ensure Termux has permission to access storage and audio.
+- If you're not using the default Termux environment, adjust paths if necessary.
+- Do **not** commit your `.env` file if uploading to GitHub or sharing the repo.
+
+---
 
 ## 📜 License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+This project is licensed under the MIT License. See `LICENSE` for full details.
 
 ---
 
-Made by Ro706 and 📱 for Termux users.
+Made by Ro706 — for the Termux power users 📱
 
 ---
 
-Let me know if you want me to generate a `LICENSE` file or package this into a `setup.py` or `requirements.txt` for easier distribution.
+Let me know if you want a `.gitignore`, `LICENSE`, or `setup.py` file added.
