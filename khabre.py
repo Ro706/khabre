@@ -1,26 +1,46 @@
 import os
 import requests
-from gtts import gTTS
-from pyfiglet import Figlet
-f = Figlet(font='slant')
-print (f.renderText('KHABRE'))
-def speack(a):
-    language ='en'
-    output=gTTS(text=a,lang=language)
-    output.save('todays_news.mp3')
-    os.system('mpv /data/data/com.termux/files/home/code/todays_news.mp3')
-    os.system('rm -r /data/data/com.termux/files/home/code/todays_news.mp3')
-api_key='a8c42b827a044f0b90d1d1fb314ef182'
-def news():
-    main_url="https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey="+api_key
-    news=requests.get(main_url).json()
-    article=news["articles"]
-    news_article=[]
-    for arti in article:
-        news_article.append(arti["title"])
-    for i in range(len(news_article)):
-        a=i+1,news_article[i]
-        print (i+1,news_article[i])
-        speack(news_article[i])
-news()
+import datetime
+from gtts import gTTS  # Ensure gTTS is installed via pip
+NEWS_API_KEY = 'API KEY'
 
+class Speak:
+    def __init__(self, news):
+        self.language = 'en'
+        self.news = news
+
+    def speak(self):
+        output = gTTS(text=self.news, lang=self.language)
+        output.save('todays_news.mp3')
+        os.system('mpv /data/data/com.termux/files/home/khabre/todays_news.mp3')
+        os.system('rm -r /data/data/com.termux/files/home/khabre/todays_news.mp3')
+
+class News:
+    def __init__(self):
+        if not NEWS_API_KEY:
+            raise ValueError("NEWS_API_KEY is missing! Please set it.")
+        self.url = f"https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey={NEWS_API_KEY}"
+
+    def get_news(self):
+        news_data = requests.get(self.url).json()
+        articles = news_data.get("articles", [])
+        news_titles = [article["title"] for article in articles if "title" in article]
+
+        print("Date:", datetime.datetime.now().strftime("%d-%m-%Y"))
+        print("News Report:")
+
+        for i, title in enumerate(news_titles[:10]):  # limiting to 10 headlines for brevity
+            print(f"{i + 1}. {title}")
+
+        # Optionally, speak the news headlines
+        if news_titles:
+            all_titles = "\n".join([f"{i + 1}. {title}" for i, title in enumerate(news_titles[:10])])
+            speaker = Speak(all_titles)
+            speaker.speak()
+
+def news_report():
+    obj = News()
+    obj.get_news()
+
+if __name__ == "__main__":
+    news_report()
