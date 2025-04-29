@@ -9,12 +9,6 @@
 - Plays the generated audio using `mpv`.
 - Automatically deletes the audio file after playback.
 
-## 🚀 Requirements
-
-- Python 3
-- [gTTS](https://pypi.org/project/gTTS/)
-- [requests](https://pypi.org/project/requests/)
-- [mpv](https://termux.dev/en/packages/mpv)
 
 ## 📲 Installation (in Termux)
 
