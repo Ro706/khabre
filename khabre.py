@@ -15,7 +15,7 @@ class Speak:
 
     def speak(self):
         output = gTTS(text=self.news, lang=self.language)
-        file_path = '/data/data/com.termux/files/home/khabre/todays_news.mp3'
+        file_path = 'todays_news.mp3'
         output.save(file_path)
         os.system(f'mpv "{file_path}"')  # Play with mpv
         os.remove(file_path)
