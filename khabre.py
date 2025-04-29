@@ -1,8 +1,11 @@
 import os
 import requests
 import datetime
+from dotenv import load_dotenv
 from gtts import gTTS  # Ensure gTTS is installed via pip
-NEWS_API_KEY = 'API KEY'
+
+load_dotenv()
+NEWS_API_KEY =os.getenv("NEWS_API_KEY")
 
 class Speak:
     def __init__(self, news):
